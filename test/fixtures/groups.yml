@@ -1,9 +1,50 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  name: MyString1
   description: MyText
 
 two:
-  name: MyString
+  name: MyString2
   description: MyText
+
+three:
+  name: MyString3
+  description: MyText
+
+four:
+  name: MyString4
+  description: MyText
+
+five:
+  name: MyString5
+  description: MyText
+
+six:
+  name: MyString6
+  description: MyText
+
+seven:
+  name: MyString7
+  description: MyText
+
+eight:
+  name: MyString8
+  description: MyText
+
+nine:
+  name: MyString9
+  description: MyText
+
+ten:
+  name: MyString10
+  description: MyText
+
+aaa:
+  name: AAA
+  description: MyText
+
+zzz:
+  name: ZZZ
+  description: MyText
+

@@ -2,7 +2,8 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-    @groups = Group.find(:all)
+    #~ @groups = Group.find(:all)
+    @groups = Group.find(:all, :limit => 10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -82,4 +83,10 @@ class GroupsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def sort_by_group_name
+    @groups = Group.find(:all, :order => :name, :limit => 10)
+    render :action => :index
+  end
+
 end
