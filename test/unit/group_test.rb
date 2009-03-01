@@ -18,6 +18,5 @@ class GroupTest < ActiveSupport::TestCase
     assert !group.valid?
     assert group.errors.on(:name)
   end
-
-
+  
 end
