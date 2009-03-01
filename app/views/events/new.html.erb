@@ -1,0 +1,39 @@
+<h1>New Event</h1>
+
+<% form_for(@event) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date %>
+  </p>
+  <p>
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date %>
+  </p>
+  <p>
+    <%= f.label :group_name %><br />
+    <%= f.select :group_id,
+           Group.find(:all).collect {|grp| [ grp.name, grp.id ] }, 
+           { :include_blank => false } %>
+  </p>
+  <p>
+    <%= f.label :location_name %><br />
+    <%= f.select :location_id,
+           Location.find(:all).collect {|loc| [ loc.name, loc.id ] }, 
+           { :include_blank => false } %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', events_path %>

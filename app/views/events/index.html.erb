@@ -1,0 +1,38 @@
+<h1>All Events</h1>
+<table cellpadding="5" cellspacing="0">
+  <tr>
+    <td>
+      Event Name
+    </td>
+    <td>
+      Event Description
+    </td>
+    <td>
+      Group Name
+    </td>
+    <td>
+      Location
+    </td>
+  </tr>
+  <% for event in @events %>
+  <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
+    <td>
+      <%=h event.name %>
+    </td>
+    <td>
+      <%=h event.description %>
+    </td>
+    <td>
+      <%=h event.group.name %>
+    </td>
+    <td>
+      <%=h event.location.name %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to 'New Event', new_event_path %>
+<p/>
+<%= link_to 'Sort by group', events_path(:sort_key => 'group') %>
+<%= link_to 'Sort by location', events_path(:sort_key => 'location') %>
