@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
+  name: MyString1
   latitude: MyString
   longitude: MyString
   address: MyText
 
 two:
-  name: MyString
+  name: MyString2
   latitude: MyString
   longitude: MyString
   address: MyText

@@ -104,22 +104,22 @@ class GroupsControllerTest < ActionController::TestCase
     assert_match(/Name has already been taken/, @response.body)
   end
 
-  test "Limits the number of groups to 10" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:groups)
-    assert assigns(:groups).size <= 10
-  end
+  #~ test "Limits the number of groups to 10" do
+    #~ get :index
+    #~ assert_response :success
+    #~ assert_not_nil assigns(:groups)
+    #~ assert assigns(:groups).size <= 10
+  #~ end
 
-  test "sort by group name" do
-    get :sort_by_group_name
-    assert_response :success
-    assert_not_nil assigns(:groups)
-    @sorted_grps = assigns(:groups)
+  #~ test "sort by group name" do
+    #~ get :sort_by_group_name
+    #~ assert_response :success
+    #~ assert_not_nil assigns(:groups)
+    #~ @sorted_grps = assigns(:groups)
     
-    assert_equal 'AAA', @sorted_grps[0].name
+    #~ assert_equal 'AAA', @sorted_grps[0].name
     #~ 'ZZZ' will not appear in the returned result set since the result is trimmed to 10 values
-    assert_equal 'MyString8', @sorted_grps[-1].name
-  end
+    #~ assert_equal 'MyString8', @sorted_grps[-1].name
+  #~ end
   
 end

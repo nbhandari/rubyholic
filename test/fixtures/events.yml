@@ -5,13 +5,118 @@ one:
   description: MyText
   start_date: 2009-03-01
   end_date: 2009-03-01
-  group_id: 1
-  location_id: 1
+  group_name: groups(:one).name
+  location_name: locations(:one).name
+  group_id: groups(:one).id
+  location_id: locations(:one).id
 
 two:
   name: MyString
   description: MyText
   start_date: 2009-03-01
   end_date: 2009-03-01
-  group_id: 1
-  location_id: 1
+  group_name: groups(:two).name
+  location_name: locations(:two).name
+  group_id: groups(:two).id
+  location_id: locations(:two).id
+
+three:
+  name: MyString
+  description: MyText
+  start_date: 2009-03-01
+  end_date: 2009-03-01
+  group_name: groups(:one).name
+  location_name: locations(:one).name
+  group_id: groups(:one).id
+  location_id: locations(:one).id
+
+four:
+  name: MyString
+  description: MyText
+  start_date: 2009-03-01
+  end_date: 2009-03-01
+  group_name: groups(:two).name
+  location_name: locations(:two).name
+  group_id: groups(:two).id
+  location_id: locations(:two).id
+
+five:
+  name: MyString
+  description: MyText
+  start_date: 2009-03-01
+  end_date: 2009-03-01
+  group_name: groups(:one).name
+  location_name: locations(:one).name
+  group_id: groups(:one).id
+  location_id: locations(:one).id
+
+six:
+  name: MyString
+  description: MyText
+  start_date: 2009-03-01
+  end_date: 2009-03-01
+  group_name: groups(:two).name
+  location_name: locations(:two).name
+  group_id: groups(:two).id
+  location_id: locations(:two).id
+
+seven:
+  name: MyString
+  description: MyText
+  start_date: 2009-03-01
+  end_date: 2009-03-01
+  group_name: groups(:one).name
+  location_name: locations(:one).name
+  group_id: groups(:one).id
+  location_id: locations(:one).id
+
+eight:
+  name: MyString
+  description: MyText
+  start_date: 2009-03-01
+  end_date: 2009-03-01
+  group_name: groups(:two).name
+  location_name: locations(:two).name
+  group_id: groups(:two).id
+  location_id: locations(:two).id
+
+nine:
+  name: MyString
+  description: MyText
+  start_date: 2009-03-01
+  end_date: 2009-03-01
+  group_name: groups(:one).name
+  location_name: locations(:one).name
+  group_id: groups(:one).id
+  location_id: locations(:one).id
+
+ten:
+  name: MyString
+  description: MyText
+  start_date: 2009-03-01
+  end_date: 2009-03-01
+  group_name: groups(:two).name
+  location_name: locations(:two).name
+  group_id: groups(:two).id
+  location_id: locations(:two).id
+
+eleven:
+  name: MyString
+  description: MyText
+  start_date: 2009-03-01
+  end_date: 2009-03-01
+  group_name: groups(:one).name
+  location_name: locations(:one).name
+  group_id: groups(:one).id
+  location_id: locations(:one).id
+
+twelve:
+  name: MyString
+  description: MyText
+  start_date: 2009-03-01
+  end_date: 2009-03-01
+  group_name: groups(:two).name
+  location_name: locations(:two).name
+  group_id: groups(:two).id
+  location_id: locations(:two).id
+

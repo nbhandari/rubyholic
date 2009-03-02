@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class EventsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "index" do
+    get :index
   end
 end

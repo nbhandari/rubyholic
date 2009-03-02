@@ -13,6 +13,12 @@
     <td>
       Location
     </td>
+    <td>
+      Start date
+    </td>
+    <td>
+      End date
+    </td>
   </tr>
   <% for event in @events %>
   <tr valign="top" class="<%= cycle('list-line-odd', 'list-line-even') %>">
@@ -27,6 +33,12 @@
     </td>
     <td>
       <%=h event.location.name %>
+    </td>
+    <td>
+      <%=h event.start_date%>
+    </td>
+    <td>
+      <%=h event.end_date%>
     </td>
   </tr>
   <% end %>

@@ -22,13 +22,13 @@
   <p>
     <%= f.label :group_name %><br />
     <%= f.select :group_id,
-           Group.find(:all).collect {|grp| [ grp.name, grp.id ] }, 
+            Event.all_groups_collection,
            { :include_blank => false } %>
   </p>
   <p>
     <%= f.label :location_name %><br />
     <%= f.select :location_id,
-           Location.find(:all).collect {|loc| [ loc.name, loc.id ] }, 
+           Event.all_locations_collection,
            { :include_blank => false } %>
   </p>
   <p>
