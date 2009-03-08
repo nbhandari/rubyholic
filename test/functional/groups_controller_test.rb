@@ -121,6 +121,7 @@ class GroupsControllerTest < ActionController::TestCase
   end
   
   test "should sort on location name" do
+    #~ create the association of events with groups
     all_events = Event.find(:all)
       all_events.each do |e|
       e.group = groups(:aaa)
@@ -128,6 +129,8 @@ class GroupsControllerTest < ActionController::TestCase
       e.save
     end
     
+    #~ make one event use group 'zzz' (this should be last when sorted by group name), 
+    #~ but set its location to 'one'. All other events use location of 'two'
     evt = events(:one)
     evt.group = groups(:zzz)
     evt.location = locations(:one)

@@ -40,8 +40,23 @@ class EventsControllerTest < ActionController::TestCase
       Location.find(:all).each do |loc|
         assert_select "option",  loc.name
       end
-    end
+    end  
+  end
   
+  test "should create event" do
+    assert_difference('Event.count') do
+      post :create, :event => { 
+        :name => 'New event',
+        :description => 'My event description',
+        :start_date => Time.now,
+        :end_date=> Time.now + 24*3600,
+        #~ :group_name => groups(:one),
+        :group_id => groups(:one).id,
+        #~ :location_name => locations(:one)
+        :location_id => locations(:one).id
+      }
+    end
+    assert_redirected_to :action => :index
   end
   
 end
