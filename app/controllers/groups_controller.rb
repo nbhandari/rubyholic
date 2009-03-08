@@ -1,4 +1,7 @@
 class GroupsController < ApplicationController
+  
+  @@limit = 10
+
   # GET /groups
   # GET /groups.xml
   def index
@@ -84,9 +87,19 @@ class GroupsController < ApplicationController
     end
   end
   
-  #~ def sort_by_group_name
-    #~ @groups = Group.find(:all, :order => :name, :limit => 10)
-    #~ render :action => :index
-  #~ end
+  def sort_by_group_name
+    @groups = Group.find(:all, :order => :name, :limit => @@limit)
+    render :action => :index
+  end
 
+  def sort_by_location_name
+    #~ @groups = Group.find(:all, :include => [:events => :location], :order => 'locations.name, groups.name', :limit => @@limit)
+    @groups = Group.find(:all, 
+                                  :joins => "as grps INNER JOIN events as evts on grps.id = evts.group_id INNER JOIN locations as locs on evts.location_id = locs.id", 
+                                  :order => 'locs.name, grps.name', 
+                                  :select => "DISTINCT grps.*", 
+                                  :limit => @@limit)
+    render :action => :index
+  end
+  
 end

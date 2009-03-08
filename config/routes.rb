@@ -1,9 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :locations
-
-  map.resources :groups
+  map.connect 'groups/sort_by_group_name', :controller => 'groups', :action => 'sort_by_group_name'
+  map.connect 'groups/sort_by_location_name', :controller => 'groups', :action => 'sort_by_location_name'
   
+  map.resources :locations
+  map.resources :groups
   map.resources :events
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
 

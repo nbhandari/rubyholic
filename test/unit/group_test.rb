@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class GroupTest < ActiveSupport::TestCase
+  
+  def setup
+    @limit = 10
+  end
+  
   test "group validates presence of name" do
     group = Group.new
     assert !group.valid?
@@ -18,5 +23,5 @@ class GroupTest < ActiveSupport::TestCase
     assert !group.valid?
     assert group.errors.on(:name)
   end
-  
+
 end

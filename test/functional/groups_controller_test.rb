@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class GroupsControllerTest < ActionController::TestCase
+  
+  def setup
+    @limit_num_grps = 10
+  end
+  
 
   test "should get index" do
     get :index
@@ -103,23 +108,35 @@ class GroupsControllerTest < ActionController::TestCase
     
     assert_match(/Name has already been taken/, @response.body)
   end
-
-  #~ test "Limits the number of groups to 10" do
-    #~ get :index
-    #~ assert_response :success
-    #~ assert_not_nil assigns(:groups)
-    #~ assert assigns(:groups).size <= 10
-  #~ end
-
-  #~ test "sort by group name" do
-    #~ get :sort_by_group_name
-    #~ assert_response :success
-    #~ assert_not_nil assigns(:groups)
-    #~ @sorted_grps = assigns(:groups)
+  
+  
+  test "should sort on group name" do
+    get :sort_by_group_name
+    grps_actual = assigns(:groups)
     
-    #~ assert_equal 'AAA', @sorted_grps[0].name
-    #~ 'ZZZ' will not appear in the returned result set since the result is trimmed to 10 values
-    #~ assert_equal 'MyString8', @sorted_grps[-1].name
-  #~ end
+    all_grps = Group.find(:all)
+    grps_expected = all_grps.sort {|g1, g2| g1.name <=> g2.name }
+    grps_expected = grps_expected[0, @limit_num_grps]
+    assert_equal grps_expected, grps_actual
+  end
+  
+  test "should sort on location name" do
+    all_events = Event.find(:all)
+      all_events.each do |e|
+      e.group = groups(:aaa)
+      e.location = locations(:two)
+      e.save
+    end
+    
+    evt = events(:one)
+    evt.group = groups(:zzz)
+    evt.location = locations(:one)
+    evt.save
+    
+    get :sort_by_location_name
+    grps_actual = assigns(:groups)
+    
+    assert_equal groups(:zzz), grps_actual[0]
+  end
   
 end
