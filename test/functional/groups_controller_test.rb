@@ -140,6 +140,18 @@ class GroupsControllerTest < ActionController::TestCase
     grps_actual = assigns(:groups)
     
     assert_equal groups(:zzz), grps_actual[0]
+    assert grps_actual.size <= @limit_num_grps
+  end
+  
+  test "limits number of groups displayed on index to 10" do
+    all_grps = Group.find(:all)
+    assert all_grps.size > @limit_num_grps
+    
+    get :index
+    displayed_grps = assigns(:groups)
+    
+    assert_not_nil displayed_grps
+    assert displayed_grps.size <= @limit_num_grps
   end
   
 end
