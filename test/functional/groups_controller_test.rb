@@ -149,12 +149,39 @@ class GroupsControllerTest < ActionController::TestCase
     assert all_grps.size > @limit_num_grps
     
     get :index
+    assert_response :success
+    
+    assert_tag :tag => 'a', :attributes => {
+      :class => 'next_page',
+      :href => '/groups?page=2'
+    }
+    
     displayed_grps = assigns(:groups)
     
     assert_not_nil displayed_grps
+    assert displayed_grps.size > 0
     assert displayed_grps.size <= @limit_num_grps
   end
   
+  test "pagination on groups" do
+    all_grps = Group.find(:all)
+    assert all_grps.size > @limit_num_grps
+    
+    get :index, :page => 2
+    
+    assert_response :success
+    
+    assert_tag :tag => 'a', :attributes => {
+      :class => 'prev_page',
+      :href => '/groups?page=1'
+    }
+
+    displayed_grps = assigns(:groups)
+    
+    assert_not_nil displayed_grps
+    assert displayed_grps.size > 0
+    assert displayed_grps.size <= @limit_num_grps
+  end
   
   test "get index with IP address" do
     ip = '66.235.6.100'

@@ -19,8 +19,12 @@
 
 <br />
 
+<%= will_paginate @groups %>
+
+
 <%= link_to 'New group', new_group_path %>
 <p/>
+
 Sort by:
 <%= link_to 'Group Name', :action => :sort_by_group_name %>
 <%= link_to 'Location Name', :action => :sort_by_location_name %>

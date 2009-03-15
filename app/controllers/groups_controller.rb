@@ -1,12 +1,12 @@
 class GroupsController < ApplicationController
-  before_filter :find_user_location
+  before_filter :find_user_location, :curr_page_number
   
   @@limit = 10
 
   # GET /groups
   # GET /groups.xml
   def index
-    @groups = Group.find_groups
+    @groups = Group.find_groups @curr_page
     
     respond_to do |format|
       format.html # index.html.erb
@@ -88,18 +88,18 @@ class GroupsController < ApplicationController
   end
   
   def sort_by_group_name
-    @groups = Group.sort_by_group_name
+    @groups = Group.sort_by_group_name @curr_page
     render :action => :index
   end
 
   def sort_by_location_name
-    @groups = Group.sort_by_location_name
+    @groups = Group.sort_by_location_name @curr_page
     render :action => :index
   end
     
   def sort_by_location_distance
     #~ @location = GeoIPClient.city('iitg.com')
-    @groups = Group.sort_by_location_distance @location[9, 2]
+    @groups = Group.sort_by_location_distance @location[9, 2], @curr_page
     render :action => :index
   end
   
@@ -108,4 +108,7 @@ class GroupsController < ApplicationController
     @location = GeoIPClient.city(request.headers['REMOTE_HOST'])
   end
   
+  def curr_page_number
+    @curr_page = params[:page]
+  end
 end
