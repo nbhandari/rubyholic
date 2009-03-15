@@ -21,5 +21,7 @@
 
 <%= link_to 'New group', new_group_path %>
 <p/>
-<%= link_to 'Sort by Name', :action => :sort_by_group_name %>
-<%= link_to 'Sort by Location', :action => :sort_by_location_name %>
+Sort by:
+<%= link_to 'Group Name', :action => :sort_by_group_name %>
+<%= link_to 'Location Name', :action => :sort_by_location_name %>
+<%= link_to "View near #{@location[7]}", :action => :sort_by_location_distance %>

@@ -2,12 +2,12 @@
 
 one:
   name: MyString1
-  latitude: MyString
-  longitude: MyString
+  latitude: 47.5839
+  longitude: 122.2995
   address: MyText
 
 two:
   name: MyString2
-  latitude: MyString
-  longitude: MyString
+  latitude: 47.5839
+  longitude: -122.2995
   address: MyText

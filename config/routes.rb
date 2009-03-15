@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.connect 'groups/sort_by_group_name', :controller => 'groups', :action => 'sort_by_group_name'
   map.connect 'groups/sort_by_location_name', :controller => 'groups', :action => 'sort_by_location_name'
+  map.connect 'groups/sort_by_location_distance', :controller => 'groups', :action => 'sort_by_location_distance'
   
   map.resources :locations
   map.resources :groups

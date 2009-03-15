@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class LocationsControllerTest < ActionController::TestCase
+  
+  def setup
+    @loc_name = 'Office'
+    @loc_addr = '333 108th Ave NE, Bellevue, WA'
+  end
+  
   test "should get index" do
     get :index
     assert_response :success
@@ -13,20 +19,16 @@ class LocationsControllerTest < ActionController::TestCase
     assert_tag :tag => 'input', :attributes => {
       :name => 'location[name]'
     }
-    assert_tag :tag => 'input', :attributes => {
-      :name => 'location[latitude]'
-    }
-    assert_tag :tag => 'input', :attributes => {
-      :name => 'location[longitude]'
+    assert_tag :tag => 'textarea', :attributes => {
+      :name => 'location[address]'
     }
   end
 
   test "should create location" do
     assert_difference('Location.count') do
       post :create, :location => { 
-        :name => 'My location',
-        :latitude => '60N',
-        :longitude => '90W'
+        :name => @loc_name ,
+        :address => @loc_addr
       }
     end
 
@@ -43,11 +45,8 @@ class LocationsControllerTest < ActionController::TestCase
     assert_tag :tag => 'input', :attributes => {
       :name => 'location[name]'
     }
-    assert_tag :tag => 'input', :attributes => {
-      :name => 'location[latitude]'
-    }
-    assert_tag :tag => 'input', :attributes => {
-      :name => 'location[longitude]'
+    assert_tag :tag => 'textarea', :attributes => {
+      :name => 'location[address]'
     }
     assert_response :success
   end
@@ -72,9 +71,8 @@ class LocationsControllerTest < ActionController::TestCase
   test "should error on name" do
     assert_difference('Location.count', 0) do
       post :create, :location => {
-        #~ :name => 'My loc',
-        :latitude => '60N',
-        :longitude => '100W'
+        #~ :name => @loc_name ,
+        :address => @loc_addr
       }
     end
     
@@ -84,37 +82,52 @@ class LocationsControllerTest < ActionController::TestCase
     
     assert_match(/Name can\'t be blank/, @response.body)
   end
-
-  test "should error on latitude" do
-    assert_difference('Location.count', 0) do
-      post :create, :location => {
-        :name => 'My loc',
-        #~ :latitude => '60N',
-        :longitude => '100W'
-      }
-    end
-    
-    assert location = assigns(:location)
-    assert !location.valid?
-    location.errors.on(:latitude)
-    
-    assert_match(/Latitude can\'t be blank/, @response.body)
-  end
   
-  test "should error on longitude" do
+  test "should error on address" do
     assert_difference('Location.count', 0) do
       post :create, :location => {
-        :name => 'My loc',
-        :latitude => '60N',
-        #~ :longitude => '100W'
+        :name => @loc_name
+        #~ :address => @loc_addr
       }
     end
     
     assert location = assigns(:location)
     assert !location.valid?
-    location.errors.on(:longitude)
+    location.errors.on(:address)
     
-    assert_match(/Longitude can\'t be blank/, @response.body)
+    assert_match(/Address could not locate address/, @response.body)
   end
+
+
+  #~ test "should error on latitude" do
+    #~ assert_difference('Location.count', 0) do
+      #~ post :create, :location => {
+        #~ :name => 'My loc',
+        #~ :longitude => '100W'
+      #~ }
+    #~ end
+    
+    #~ assert location = assigns(:location)
+    #~ assert !location.valid?
+    #~ location.errors.on(:latitude)
+    
+    #~ assert_match(/Latitude can\'t be blank/, @response.body)
+  #~ end
+  
+  #~ test "should error on longitude" do
+    #~ assert_difference('Location.count', 0) do
+      #~ post :create, :location => {
+        #~ :name => 'My loc',
+        #~ :latitude => '60N',
+        #~ :longitude => '100W'
+      #~ }
+    #~ end
+    
+    #~ assert location = assigns(:location)
+    #~ assert !location.valid?
+    #~ location.errors.on(:longitude)
+    
+    #~ assert_match(/Longitude can\'t be blank/, @response.body)
+  #~ end
 
 end

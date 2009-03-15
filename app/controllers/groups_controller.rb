@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_filter :find_user_location
   
   @@limit = 10
 
@@ -92,9 +93,19 @@ class GroupsController < ApplicationController
   end
 
   def sort_by_location_name
-    #~ @groups = Group.find(:all, :include => [:events => :location], :order => 'locations.name, groups.name', :limit => @@limit)
     @groups = Group.sort_by_location_name
     render :action => :index
   end
     
+  def sort_by_location_distance
+    #~ @location = GeoIPClient.city('iitg.com')
+    @groups = Group.sort_by_location_distance @location[9, 2]
+    render :action => :index
+  end
+  
+  private
+  def find_user_location
+    @location = GeoIPClient.city(request.headers['REMOTE_HOST'])
+  end
+  
 end

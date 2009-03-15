@@ -41,7 +41,7 @@ class LocationsController < ApplicationController
   # POST /locations.xml
   def create
     @location = Location.new(params[:location])
-
+    
     respond_to do |format|
       if @location.save
         flash[:notice] = 'Location was successfully created.'
@@ -58,7 +58,7 @@ class LocationsController < ApplicationController
   # PUT /locations/1.xml
   def update
     @location = Location.find(params[:id])
-
+    
     respond_to do |format|
       if @location.update_attributes(params[:location])
         flash[:notice] = 'Location was successfully updated.'
@@ -82,4 +82,5 @@ class LocationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

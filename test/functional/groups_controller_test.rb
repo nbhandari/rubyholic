@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'flexmock/test_unit'
 
 class GroupsControllerTest < ActionController::TestCase
   
@@ -152,6 +153,69 @@ class GroupsControllerTest < ActionController::TestCase
     
     assert_not_nil displayed_grps
     assert displayed_grps.size <= @limit_num_grps
+  end
+  
+  
+  test "get index with IP address" do
+    ip = '66.235.6.100'
+ 
+    @request.env['REMOTE_HOST'] = ip
+ 
+    flexmock(GeoIPClient).should_receive(:city).once.with(ip).and_return(
+      [ "66.235.6.100",
+        "66.235.6.100",
+        "US",
+        "USA",
+        "United States",
+        "NA",
+        "WA",
+        "Seattle",
+        "98144",
+        47.5839, -122.2995, 819, 206]
+    )
+    get :index
+  end
+  
+  test "should sort on location distance" do
+    #~ create the association of events with groups
+    all_events = Event.find(:all)
+      all_events.each do |e|
+      e.group = groups(:aaa)
+      e.location = locations(:one)
+      e.save
+    end
+    
+    #~ make one event use group 'two' 
+    #~ set its location to 'two'. All other events use location of 'one'
+    #~ location 'two' has the same lat-long as the user's IP. So this should show up when sorted by distance
+    evt = events(:one)
+    evt.group = groups(:two)
+    evt.location = locations(:two)
+    evt.save
+    
+    #~ Setup flexmock to return user's IP location as that of location two
+    ip = '11.111.11.100'
+ 
+    @request.env['REMOTE_HOST'] = ip
+ 
+    flexmock(GeoIPClient).should_receive(:city).once.with(ip).and_return(
+      [ "11.111.11.100",
+        "11.111.11.100",
+        "US",
+        "USA",
+        "United States",
+        "NA",
+        "WA",
+        "Seattle",
+        "98144",
+        47.5839, -122.2995, 819, 206]
+    )
+    
+    get :sort_by_location_distance
+    grps_actual = assigns(:groups)
+    
+    assert_equal 1, grps_actual.size
+    assert_equal groups(:two), grps_actual[0]
   end
   
 end
